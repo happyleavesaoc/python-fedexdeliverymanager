@@ -1,4 +1,4 @@
-# python-myusps
+# python-fedexdeliverymanager
 
 Python 3 API for [Fedex Delivery Manager](https://www.fedex.com/us/delivery/), a way to track packages.
 
