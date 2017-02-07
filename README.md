@@ -2,6 +2,10 @@
 
 Python 3 API for [Fedex Delivery Manager](https://www.fedex.com/us/delivery/), a way to track packages.
 
+## Prerequisites
+
+Sign up for Fedex Delivery Manager and verify your address.
+
 ## Install
 
 `pip install fedexdeliverymanager`
