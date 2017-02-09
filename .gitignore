@@ -1,0 +1,5 @@
+dist/
+fedexdeliverymanager.egg-info/
+.tox/
+*.pickle
+*.pyc
