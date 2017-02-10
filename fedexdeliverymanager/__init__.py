@@ -33,6 +33,7 @@ SHIPMENT_LIST_REQUEST = {
         'shipmentFilterList': []
     }
 }
+ATTRIBUTION = 'Information provided by www.fedex.com'
 
 
 class FedexError(Exception):
