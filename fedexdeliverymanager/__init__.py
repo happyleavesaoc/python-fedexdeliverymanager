@@ -95,10 +95,13 @@ def get_packages(session):
         'locale': session.auth.locale,
         'version': 1
     })
-    if not resp.json().get('ShipmentListLightResponse').get('successful'):
-        raise FedexError('failed to get shipment list')
+    data = resp.json().get('ShipmentListLightResponse')
+    if not data.get('successful'):
+        err = 'failed to get shipment list: {}'.format(data.get('errorList')[0]
+                                                       .get('message'))
+        raise FedexError(err)
     packages = []
-    for package in resp.json().get('ShipmentListLightResponse').get('shipmentLightList'):
+    for package in data.get('shipmentLightList'):
         packages.append({
             'weight': package['dispPkgLbsWgt'],
             'dimensions': package['pkgDimIn'],
