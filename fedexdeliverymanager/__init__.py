@@ -108,7 +108,7 @@ def get_packages(session):
                                                  package['shprStCD'], package['shprCntryCD']),
             'primary_status': package['keyStat'],
             'secondary_status': package['mainStat'],
-            'estimated_delivery_date': str(parse(package['estDelTs']).date()),
+            'estimated_delivery_date': str(parse(package['estDelTs']).date()) if package['estDelTs'] else '',
             'delivery_date': str(parse(package['delTs']).date()) if package['delTs'] else ''
         })
     return packages
