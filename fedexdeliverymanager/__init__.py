@@ -97,20 +97,25 @@ def get_packages(session):
     })
     if not resp.json().get('ShipmentListLightResponse').get('successful'):
         raise FedexError('failed to get shipment list')
+    if not resp.json().get('ShipmentListLightResponse').get('shipmentLightList'):
+        raise FedexError('shipment list is empty')
     packages = []
     for package in resp.json().get('ShipmentListLightResponse').get('shipmentLightList'):
-        packages.append({
-            'weight': package['dispPkgLbsWgt'],
-            'dimensions': package['pkgDimIn'],
-            'tracking_number': package['trkNbr'],
-            'from': package['shpBy'],
-            'shipped_from': '{} {} {} {}'.format(package['shprAddr1'], package['shprCity'],
-                                                 package['shprStCD'], package['shprCntryCD']),
-            'primary_status': package['keyStat'],
-            'secondary_status': package['mainStat'],
-            'estimated_delivery_date': str(parse(package['estDelTs']).date()) if package['estDelTs'] else '',
-            'delivery_date': str(parse(package['delTs']).date()) if package['delTs'] else ''
-        })
+        if package['trkNbr']:
+            packages.append({
+                'weight': package['dispPkgLbsWgt'],
+                'dimensions': package['pkgDimIn'],
+                'tracking_number': package['trkNbr'],
+                'from': package['shpBy'],
+                'shipped_from': '{} {} {} {}'.format(package['shprAddr1'], package['shprCity'],
+                                                     package['shprStCD'], package['shprCntryCD']),
+                'primary_status': package['keyStat'],
+                'secondary_status': package['mainStat'],
+                'estimated_delivery_date': str(parse(package['estDelTs']).date())
+                                           if package['estDelTs'] else '',
+                'delivery_date': str(parse(package['delTs']).date())
+                                 if package['delTs'] else ''
+            })
     return packages
 
 
