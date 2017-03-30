@@ -1,3 +1,5 @@
+[![PyPI version](https://badge.fury.io/py/fedexdeliverymanager.svg)](https://badge.fury.io/py/fedexdeliverymanager)
+
 # python-fedexdeliverymanager
 
 Python 3 API for [Fedex Delivery Manager](https://www.fedex.com/us/delivery/), a way to track packages.
