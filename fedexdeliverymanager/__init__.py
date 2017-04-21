@@ -102,6 +102,10 @@ def get_packages(session):
         raise FedexError(err)
     packages = []
     for package in data.get('shipmentLightList'):
+        if 'trkNbr' not in package:
+            continue
+        if not package['trkNbr']:
+            continue
         packages.append({
             'weight': package['dispPkgLbsWgt'],
             'dimensions': package['pkgDimIn'],
