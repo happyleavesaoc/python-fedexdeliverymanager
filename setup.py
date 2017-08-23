@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='fedexdeliverymanager',
-    version='1.0.3',
+    version='1.0.4',
     description='Python 3 API for Fedex Delivery Manager, a way to track packages.',
     url='https://github.com/happyleavesaoc/python-fedexdeliverymanager/',
     license='MIT',

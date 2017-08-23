@@ -102,9 +102,9 @@ def get_packages(session):
         raise FedexError(err)
     packages = []
     for package in data.get('shipmentLightList'):
-        if 'trkNbr' not in package:
+        if 'trkNbr' not in package or not package['trkNbr']:
             continue
-        if not package['trkNbr']:
+        if 'isOut' in package and package['isOut'] == '1':
             continue
         packages.append({
             'weight': package['dispPkgLbsWgt'],
@@ -115,7 +115,8 @@ def get_packages(session):
                                                  package['shprStCD'], package['shprCntryCD']),
             'primary_status': package['keyStat'],
             'secondary_status': package['mainStat'],
-            'estimated_delivery_date': str(parse(package['estDelTs']).date()) if package['estDelTs'] else '',
+            'estimated_delivery_date': (str(parse(package['estDelTs']).date())
+                                        if package['estDelTs'] else ''),
             'delivery_date': str(parse(package['delTs']).date()) if package['delTs'] else ''
         })
     return packages
